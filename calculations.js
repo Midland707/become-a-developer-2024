@@ -68,9 +68,20 @@ const findMedian = (data) => {
   }
 };
 
-console.log(`Найбільше число : ${findMaxNumber(data)}`);
-console.log(`Найменше число : ${findMinNumber(data)}`);
-console.log(`Медіана чисел : ${findMedian(data)}`);
+//4. Пошук середнього арифметичного в файлі
+const calculateAverage = (data) => {
+  let sum = 0;
+  data.forEach((number) => {
+    sum += number;
+  });
+  const averageNumber = sum / data.length;
+  return averageNumber;
+};
+
+console.log("Найбільше число : ", findMaxNumber(data));
+console.log("Найменше число : ", findMinNumber(data));
+console.log("Медіана чисел : ", findMedian(data));
+console.log("Середнє арифметичне значення чисел : ", calculateAverage(data));
 
 // ########## Кінець обчислень ##########
 const endTime = new Date();
