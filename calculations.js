@@ -29,8 +29,19 @@ const findMaxNumber = (data) => {
   return maxNumber;
 };
 
-const maxNumber = findMaxNumber(data);
-console.log(`Найбільше число в файлі '${fileName}': ${maxNumber}`);
+//2. Пошук мінімального числа в файлі
+const findMinNumber = (data) => {
+  let minNumber = data[0];
+  data.forEach((number) => {
+    if (number < minNumber) {
+      minNumber = number;
+    }
+  });
+  return minNumber;
+};
+
+console.log(`Найбільше число : ${findMaxNumber(data)}`);
+console.log(`Найбільше число : ${findMinNumber(data)}`);
 
 // ########## Кінець обчислень ##########
 const endTime = new Date();
