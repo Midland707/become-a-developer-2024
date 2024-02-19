@@ -16,7 +16,11 @@ console.log("Початок виконання:", getCurrentDateTime());
 
 const fs = require("fs");
 const fileName = "10m.txt";
-const data = fs.readFileSync(fileName, "utf8").split("\n").map(Number);
+const data = fs
+  .readFileSync(fileName, "utf8")
+  .split("\n")
+  .filter((line) => line.trim() !== "")
+  .map(Number);
 
 //1. Пошук максимального числа в файлі
 const findMaxNumber = (data) => {
@@ -40,8 +44,33 @@ const findMinNumber = (data) => {
   return minNumber;
 };
 
+//3. Пошук медіани файлу
+// Необхідно відсортувати масив за зростанням - wikipedia.org.
+// Якщо парна кількість елементів то шукаємо середній елемент набору чисел.
+// Якщо в наборі чисел парна кількість елементів, то для визначення медіани повинна використовуватися півсума двох сусідніх значень.
+// Тобто наприклад, у наборі { 1, 8, 14, 19 } медіаною буде 11(бо 0.5 * (8 + 14)=11).
+const findMedian = (data) => {
+  const dataSort = [...data];
+  dataSort.sort((prev, next) => prev - next);
+
+  const arrayLength = dataSort.length;
+  console.log("Кількість елементів в масиві =", arrayLength);
+  if (arrayLength % 2 === 0) {
+    const index1 = arrayLength / 2 - 1;
+    const index2 = arrayLength / 2;
+    console.log("Середнє число 1 =", dataSort[index1]);
+    console.log("Середнє число 2 =", dataSort[index2]);
+    return (dataSort[index1] + dataSort[index2]) / 2;
+  } else {
+    const index = Math.floor(arrayLength / 2);
+    console.log("Середнє число =", dataSort[index]);
+    return dataSort[index];
+  }
+};
+
 console.log(`Найбільше число : ${findMaxNumber(data)}`);
-console.log(`Найбільше число : ${findMinNumber(data)}`);
+console.log(`Найменше число : ${findMinNumber(data)}`);
+console.log(`Медіана чисел : ${findMedian(data)}`);
 
 // ########## Кінець обчислень ##########
 const endTime = new Date();
