@@ -54,16 +54,13 @@ const findMedian = (data) => {
   dataSort.sort((prev, next) => prev - next);
 
   const arrayLength = dataSort.length;
-  console.log("Кількість елементів в масиві =", arrayLength);
+
   if (arrayLength % 2 === 0) {
     const index1 = arrayLength / 2 - 1;
     const index2 = arrayLength / 2;
-    console.log("Середнє число 1 =", dataSort[index1]);
-    console.log("Середнє число 2 =", dataSort[index2]);
     return (dataSort[index1] + dataSort[index2]) / 2;
   } else {
     const index = Math.floor(arrayLength / 2);
-    console.log("Середнє число =", dataSort[index]);
     return dataSort[index];
   }
 };
@@ -78,10 +75,38 @@ const calculateAverage = (data) => {
   return averageNumber;
 };
 
+//5. Пошук найбільшої послідовністі чисел в файлі, яка збільшується
+// Послідовність чисел - це порядок чисел у файлі, що йдуть один за одним.
+// Навіть випадкові генеровані набори даних можуть мати досить довгі послідовності.
+// Наприклад, зростаюча послідовність може виглядати так: -4390, -503, 3, 16, 5032
+const findIncSequence = (data) => {
+  let maxSequence = [];
+  let currentSequence = [];
+
+  for (let i = 0; i < data.length; i++) {
+    if (i === 0 || data[i] > data[i - 1]) {
+      currentSequence.push(data[i]);
+    } else {
+      if (currentSequence.length > maxSequence.length) {
+        maxSequence = currentSequence.slice();
+      }
+      currentSequence = [data[i]];
+    }
+  }
+  if (currentSequence.length > maxSequence.length) {
+    maxSequence = currentSequence;
+  }
+  return maxSequence;
+};
+
 console.log("Найбільше число : ", findMaxNumber(data));
 console.log("Найменше число : ", findMinNumber(data));
 console.log("Медіана чисел : ", findMedian(data));
 console.log("Середнє арифметичне значення чисел : ", calculateAverage(data));
+console.log(
+  "Найбільша зростаюча послідовність чисел в файлі : ",
+  findIncSequence(data)
+);
 
 // ########## Кінець обчислень ##########
 const endTime = new Date();
