@@ -99,13 +99,38 @@ const findIncSequence = (data) => {
   return maxSequence;
 };
 
+//6. Пошук найбільшої послідовністі чисел в файлі, яка зменьшується
+const findDecSequence = (data) => {
+  let maxSequence = [];
+  let currentSequence = [];
+
+  for (let i = 0; i < data.length; i++) {
+    if (i === 0 || data[i] < data[i - 1]) {
+      currentSequence.push(data[i]);
+    } else {
+      if (currentSequence.length > maxSequence.length) {
+        maxSequence = currentSequence.slice();
+      }
+      currentSequence = [data[i]];
+    }
+  }
+  if (currentSequence.length > maxSequence.length) {
+    maxSequence = currentSequence;
+  }
+  return maxSequence;
+};
+
 console.log("Найбільше число : ", findMaxNumber(data));
 console.log("Найменше число : ", findMinNumber(data));
 console.log("Медіана чисел : ", findMedian(data));
 console.log("Середнє арифметичне значення чисел : ", calculateAverage(data));
 console.log(
-  "Найбільша зростаюча послідовність чисел в файлі : ",
+  "Найбільша послідовність чисел в файлі, яка збільшується : ",
   findIncSequence(data)
+);
+console.log(
+  "Найбільша послідовність чисел в файлі, яка зменьшується : ",
+  findDecSequence(data)
 );
 
 // ########## Кінець обчислень ##########
