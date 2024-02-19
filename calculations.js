@@ -14,6 +14,11 @@ const startTime = new Date();
 console.log("Початок виконання:", getCurrentDateTime());
 // ########## Початок обчислень ##########
 
+const fs = require("fs");
+const fileName = "10m.txt";
+const data = fs.readFileSync(fileName, "utf8").split("\n").map(Number);
+console.log(data);
+
 // ########## Кінець обчислень ##########
 const endTime = new Date();
 const executionTime = (endTime - startTime) / 1000;
