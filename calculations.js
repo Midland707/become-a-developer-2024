@@ -17,7 +17,20 @@ console.log("Початок виконання:", getCurrentDateTime());
 const fs = require("fs");
 const fileName = "10m.txt";
 const data = fs.readFileSync(fileName, "utf8").split("\n").map(Number);
-console.log(data);
+
+//1. Пошук максимального числа в файлі
+const findMaxNumber = (data) => {
+  let maxNumber = 0;
+  data.forEach((number) => {
+    if (number > maxNumber) {
+      maxNumber = number;
+    }
+  });
+  return maxNumber;
+};
+
+const maxNumber = findMaxNumber(data);
+console.log(`Найбільше число в файлі '${fileName}': ${maxNumber}`);
 
 // ########## Кінець обчислень ##########
 const endTime = new Date();
